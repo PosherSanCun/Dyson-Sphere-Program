@@ -1,0 +1,24 @@
+# 白名单：仅共享蓝图、手动存档及仓库说明。
+# 个人配置、账号文件、成就、元数据和 Steam Cloud 文件默认不入库。
+*
+!/.gitignore
+!/.gitattributes
+!/README.md
+
+!/Blueprint/
+!/Blueprint/**/
+!/Blueprint/**/*.txt
+!/Blueprints/
+!/Blueprints/**/
+!/Blueprints/**/*.txt
+
+!/Save/
+!/Save/**/
+!/Save/**/*.dsv
+!/Save/**/*.server
+
+# 自动存档和退出存档频繁变化；共享进度请使用有名称的手动存档。
+/Save/**/_autosave_*.dsv
+/Save/**/_autosave_*.server
+/Save/**/_lastexit_.dsv
+/Save/**/_lastexit_.server

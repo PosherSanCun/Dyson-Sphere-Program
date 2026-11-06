@@ -1,0 +1,11 @@
+# 仓库说明使用 LF；游戏蓝图保留原始字节。
+* text=auto
+/.gitignore text eol=lf
+/.gitattributes text eol=lf
+/README.md text eol=lf
+/Blueprint/**/*.txt -text merge=binary
+/Blueprints/**/*.txt -text merge=binary
+
+# 存档使用 Git LFS；发生冲突时禁止自动合并二进制内容。
+*.dsv filter=lfs diff=lfs merge=binary -text
+*.server filter=lfs diff=lfs merge=binary -text
