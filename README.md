@@ -4,6 +4,34 @@
 
 `.dsv` 与同名 `.server` 必须一起同步：后者是 Nebula 联机数据。两种文件均通过 Git LFS 保存，不能像文本一样合并。`_autosave_*`、`_lastexit_`、`options.xml`、`player.key`、`Achievement/`、`Property/` 和 Steam Cloud 文件不入库，原文件保留在本机。
 
+## 必须使用正确的本地目录
+
+克隆或拉取后，必须确认仓库根目录就是游戏实际使用的数据目录，而不是其 `Save` 子目录，也不是 `Documents\GitHub` 下的独立副本。默认位置为：
+
+```text
+C:\Users\<你的用户名>\Documents\Dyson Sphere Program\
+├── .git\
+├── .gitignore
+├── .gitattributes
+├── README.md
+├── Save\           ← 游戏读取和写入的 .dsv、同名 .server
+├── Blueprint\
+└── Blueprints\
+```
+
+如果系统重定向了“文档”目录，请以游戏实际的数据目录为准。不要使用 `Save\Dyson-Sphere-Program\Save` 这样的嵌套结构。只复制存档到游戏目录、却把 Git 仓库留在其他位置，会导致游戏后续保存无法出现在该仓库的 Git 变更中。
+
+### 已经克隆到其他位置时
+
+1. 退出游戏，等待 Steam Cloud 同步结束，备份游戏数据目录和已克隆的仓库。
+2. 确认游戏数据目录没有另一个 `.git` 仓库；如果已有，先核对仓库归属，不要覆盖。
+3. 将克隆仓库的 `.git`（隐藏目录）、`.gitignore`、`.gitattributes`、`README.md` 放到游戏数据目录根层；将仓库的 `Save`、`Blueprint`、`Blueprints` 内容合并到游戏目录中的同名文件夹。
+4. 同名存档或蓝图内容不一致时先保留双方副本，确认要使用的版本再处理；联机存档的 `.dsv` 与同名 `.server` 成对处理。保留本机个人配置、身份、自动存档和 Steam Cloud 文件。
+5. 将原位置的剩余副本移到游戏目录之外作为备份，避免嵌套副本被 Git 重复收录。在 Git 客户端中重新添加游戏数据目录作为本地仓库。
+6. 在游戏数据目录运行 `git rev-parse --show-toplevel` 和 `git status --short`，确认仓库根目录正确、差异符合预期；再运行 `git lfs ls-files`，确认存档为实际文件而非未下载的指针。
+
+调整后，游戏保存有名称的手动存档会直接显示为 Git 修改或新增文件，可在退出游戏并等待同步完成后提交、推送。自动存档 `_autosave_*` 和退出存档 `_lastexit_` 按 `.gitignore` 忽略；Git 不会自动提交或推送。日后只需在这个正确目录中拉取，不需要重复迁移。
+
 ## 约定
 
 - 同步前退出游戏，并等待 Steam Cloud 同步结束，避免文件仍在写入。若 Steam Cloud 与 Git 反复覆盖同一存档，再调整 Steam Cloud 设置。
