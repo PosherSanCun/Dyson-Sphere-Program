@@ -1,0 +1,7 @@
+{
+  "name": "QuickLogisticsStore",
+  "version_number": "1.0.1",
+  "website_url": "",
+  "description": "One-click storage from Icarus inventory into configured personal logistics slots, with a compact button and configurable shortcut.",
+  "dependencies": ["xiaoye97-BepInEx-5.4.17"]
+}

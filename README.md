@@ -1,8 +1,20 @@
 # 戴森球计划：联机存档与蓝图
 
-此仓库直接位于游戏的数据目录。同步 `Blueprint/`、`Blueprints/` 下的 `.txt` 蓝图，以及 `Save/` 下有名称的手动存档。
+此仓库直接位于游戏的数据目录。同步 `Blueprint/`、`Blueprints/` 下的 `.txt` 蓝图、`Save/` 下有名称的手动存档，以及 `Mods/QuickLogisticsStore/` 下的自制收纳模组。
 
 `.dsv` 与同名 `.server` 必须一起同步：后者是 Nebula 联机数据。两种文件均通过 Git LFS 保存，不能像文本一样合并。`_autosave_*`、`_lastexit_`、`options.xml`、`player.key`、`Achievement/`、`Property/` 和 Steam Cloud 文件不入库，原文件保留在本机。
+
+## 安装机甲物流一键收纳模组
+
+先保存并完全退出游戏，等待 Steam Cloud 同步结束后再拉取仓库，按 [模组安装说明](./Mods/QuickLogisticsStore/README.md) 安装 **Quick Logistics Store 1.0.1**。仓库中的 `Mods/` 是分发目录；游戏需要从自己的 `BepInEx/plugins/` 目录加载 DLL，单纯拉取不会自动安装。
+
+退出游戏后，在仓库目录运行以下命令，把示例路径改为自己的游戏安装目录（其中应有 `DSPGAME.exe` 和已安装的 BepInEx）：
+
+```powershell
+.\Mods\QuickLogisticsStore\Install.ps1 -GameDirectory 'D:\SteamLibrary\steamapps\common\Dyson Sphere Program'
+```
+
+重启游戏，打开背包，点击「物流」标题后的小收纳按钮，或按 **左 Ctrl + 左 Shift + L**。它只把普通背包物品补入已经设置物品的机甲物流格。
 
 ## 必须使用正确的本地目录
 

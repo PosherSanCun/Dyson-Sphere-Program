@@ -9,3 +9,8 @@
 # 存档使用 Git LFS；发生冲突时禁止自动合并二进制内容。
 *.dsv filter=lfs diff=lfs merge=binary -text
 *.server filter=lfs diff=lfs merge=binary -text
+
+# 自制模组的源码与说明统一换行；小体积安装产物直接入 Git。
+/Mods/QuickLogisticsStore/** text eol=lf
+/Mods/QuickLogisticsStore/dist/*.dll -text merge=binary
+/Mods/QuickLogisticsStore/dist/*.zip -text merge=binary
